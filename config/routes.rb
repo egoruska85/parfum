@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :backoffices do
     collection {get :options}
     collection {get :settings}
+    collection {get :products}
   end
 
   resources :categories
