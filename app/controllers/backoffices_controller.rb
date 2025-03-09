@@ -3,4 +3,8 @@ class BackofficesController < ApplicationController
     @genders = Gender.all
     @categories = Category.all
   end
+
+  def products
+    
+  end
 end
