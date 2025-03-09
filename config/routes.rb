@@ -8,8 +8,10 @@ Rails.application.routes.draw do
     collection {get :options}
     collection {get :settings}
     collection {get :products}
+    collection {get :interface}
   end
-
+  resources :currencies
   resources :categories
   resources :genders
+  resources :carouseles
 end

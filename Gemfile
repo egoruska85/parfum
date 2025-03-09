@@ -74,3 +74,5 @@ gem "bootstrap"
 
 gem 'devise'
 gem 'devise-bootstrap-views', '~> 1.0'
+gem "meta-tags"
+gem "breadcrumbs_on_rails"

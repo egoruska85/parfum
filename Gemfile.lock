@@ -78,6 +78,8 @@ GEM
     bootstrap (5.3.3)
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.11.8, < 3)
+    breadcrumbs_on_rails (4.1.0)
+      railties (>= 5.0)
     builder (3.3.0)
     capybara (3.40.0)
       addressable
@@ -131,6 +133,8 @@ GEM
       net-smtp
     marcel (1.0.4)
     matrix (0.4.2)
+    meta-tags (2.22.1)
+      actionpack (>= 6.0.0, < 8.1)
     method_source (1.1.0)
     mini_mime (1.1.5)
     minitest (5.25.4)
@@ -255,12 +259,14 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   bootstrap
+  breadcrumbs_on_rails
   capybara
   debug
   devise
   devise-bootstrap-views (~> 1.0)
   importmap-rails
   jbuilder
+  meta-tags
   puma (~> 5.0)
   rails (~> 7.0.8, >= 7.0.8.6)
   sassc-rails
