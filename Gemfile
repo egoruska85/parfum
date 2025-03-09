@@ -71,3 +71,6 @@ group :test do
 
 end
 gem "bootstrap"
+
+gem 'devise'
+gem 'devise-bootstrap-views', '~> 1.0'

@@ -4,4 +4,11 @@ Rails.application.routes.draw do
   root "main#index"
   # Defines the root path route ("/")
   # root "articles#index"
+  resources :backoffices do
+    collection {get :options}
+    collection {get :settings}
+  end
+
+  resources :categories
+  resources :genders
 end
