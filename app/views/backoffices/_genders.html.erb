@@ -1,0 +1,33 @@
+<div class="col-12 col-lg-2">
+  <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <h3>Пол</h3>
+    <% if @genders.any? %>
+      <% @genders.each do |gender| %>
+      <div class="row">
+        <div class="col-10">
+          <%= "#{gender.name}/#{gender.name_tm}" %>
+        </div>
+        <div class="col-2">
+          <%= button_to gender_path(gender), method: :delete, data: { turbo_confirm: 'Действительно удалить?'}, class: "btn btn-danger", style:"--bs-btn-padding-y: .15rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .15rem;" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="13" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+    <% else %>
+      Нету пола
+    <% end %>
+    <hr>
+    <%= form_for :gender, url: genders_path do |f| %>
+      <p>
+        <%= f.text_field :name, class:'form-control form-control-sm', placeholder:'На русском' %>
+      </p>
+      <p>
+        <%= f.text_field :name_tm, class:'form-control form-control-sm', placeholder:'На туркменском' %>
+      </p>
+      <center><%= f.submit 'Создать', class:"btn btn-primary", style:"--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" %></center>
+    <% end %>
+  </div>
+</div>
