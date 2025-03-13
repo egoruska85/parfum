@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body style="background: #F5F5DC;">
+    <%= render 'navbar' %>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-2">
+          <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+            <center style="font-size: 12px;"><%= @gender.name %></center>
+            <hr>
+            <div class="row">
+              <% @categories.each do |category| %>
+              <div class="col-6 col-lg-12">
+                <%= link_to category_path(category), class:"btn" do %>
+                  <%= category.name %>
+                <% end %>
+              </div>
+              <% end %>
+            </div>
+
+
+
+
+
+          </div>
+        </div>
+        <div class="col-12 col-lg-8">
+          <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+            <div class="row">
+              <% @products.each do |product| %>
+                <div class="col-6 col-lg-3">
+                  <center>
+                    <div class="card" style="min-height: 280px;">
+                      <img src="<%= rails_blob_url(product.image) %>" class="card-img-top" alt="..." style="width: absolute; height: 150px;">
+                      <div class="card-body">
+                        <h6 class="card-title" style="font-size: 12px;"><%= product.name %></h6>
+
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </body>
+</html>

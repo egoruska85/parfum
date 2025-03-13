@@ -1,0 +1,2 @@
+class Interfaceoption < ApplicationRecord
+end

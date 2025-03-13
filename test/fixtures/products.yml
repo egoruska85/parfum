@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  product_code: MyString
+  desc_ru: MyText
+  desc_tm: MyText
+  price: MyString
+  gender: one
+  category: one
+  productdiscount: one
+  country: one
+  brand: one
+
+two:
+  name: MyString
+  product_code: MyString
+  desc_ru: MyText
+  desc_tm: MyText
+  price: MyString
+  gender: two
+  category: two
+  productdiscount: two
+  country: two
+  brand: two

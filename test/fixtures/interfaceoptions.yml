@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  background: MyString
+  navbar_color: MyString
+  quantity_products_on_pages: 1
+
+two:
+  background: MyString
+  navbar_color: MyString
+  quantity_products_on_pages: 1

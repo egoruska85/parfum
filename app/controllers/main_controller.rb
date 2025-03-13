@@ -3,6 +3,11 @@ class MainController < ApplicationController
   def index
     @genders = Gender.all
     @categories = Category.all
+
+
+    @a = -1
+    @carousels = Carousel.where(id: 2..100)
+    @carousel_active = Carousel.first
   end
 
   def set_page_options

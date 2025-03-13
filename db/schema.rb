@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_03_09_214057) do
+ActiveRecord::Schema[7.0].define(version: 2025_03_10_065008) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -34,9 +34,15 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_09_214057) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "brands", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "carousels", force: :cascade do |t|
@@ -57,6 +63,13 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_09_214057) do
     t.index ["gender_id"], name: "index_categories_on_gender_id"
   end
 
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.string "name_tm"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "currencies", force: :cascade do |t|
     t.string "name"
     t.string "name_tm"
@@ -72,7 +85,52 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_09_214057) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "generaldiscounts", force: :cascade do |t|
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "interfaceoptions", force: :cascade do |t|
+    t.string "background"
+    t.string "navbar_color"
+    t.integer "quantity_products_on_pages"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "productdiscounts", force: :cascade do |t|
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "product_code"
+    t.text "desc_ru"
+    t.text "desc_tm"
+    t.string "price"
+    t.integer "gender_id", null: false
+    t.integer "category_id", null: false
+    t.integer "productdiscount_id", null: false
+    t.integer "country_id", null: false
+    t.integer "brand_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["brand_id"], name: "index_products_on_brand_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["country_id"], name: "index_products_on_country_id"
+    t.index ["gender_id"], name: "index_products_on_gender_id"
+    t.index ["productdiscount_id"], name: "index_products_on_productdiscount_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "categories", "genders"
+  add_foreign_key "products", "brands"
+  add_foreign_key "products", "categories"
+  add_foreign_key "products", "countries"
+  add_foreign_key "products", "genders"
+  add_foreign_key "products", "productdiscounts"
 end

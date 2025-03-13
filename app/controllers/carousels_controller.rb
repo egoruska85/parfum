@@ -1,14 +1,14 @@
-class CarouselesController < ApplicationController
+class CarouselsController < ApplicationController
   def create
     @carousel = Carousel.new(carousel_params)
     @carousel.save
-    redirect_to options_backoffices_path
+    redirect_to interface_backoffices_path
   end
 
   def destroy
     @carousel = Carousel.find(params[:id])
     @carousel.destroy
-    redirect_to options_backoffices_path, notice: "Удалено"
+    redirect_to interface_backoffices_path, notice: "Удалено"
   end
 
   private

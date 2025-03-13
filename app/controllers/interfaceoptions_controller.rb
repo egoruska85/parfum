@@ -1,0 +1,2 @@
+class InterfaceoptionsController < ApplicationController
+end

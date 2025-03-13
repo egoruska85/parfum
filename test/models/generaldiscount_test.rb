@@ -1,6 +1,6 @@
 require "test_helper"
 
-class CarouselesControllerTest < ActionDispatch::IntegrationTest
+class GeneraldiscountTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

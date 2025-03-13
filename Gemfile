@@ -76,3 +76,7 @@ gem 'devise'
 gem 'devise-bootstrap-views', '~> 1.0'
 gem "meta-tags"
 gem "breadcrumbs_on_rails"
+gem 'rails-i18n'
+gem 'rails_admin', '3.0'
+gem 'rails_admin-i18n'
+gem 'ransack', '~> 3.2', '>= 3.2.1'

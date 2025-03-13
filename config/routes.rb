@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
   get 'main/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "main#index"
@@ -13,5 +14,7 @@ Rails.application.routes.draw do
   resources :currencies
   resources :categories
   resources :genders
-  resources :carouseles
+  resources :carousels
+  resources :interfaceoptions
+  resources :products
 end
