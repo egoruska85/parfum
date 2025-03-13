@@ -1,0 +1,60 @@
+
+<div id="carouselExampleCaptions" class="carousel slide">
+  <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <% @carousels.each do |i| %>
+
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<%= @a + i.id %>" aria-label="Slide <%= @a + i.id + 1 %>"></button>
+
+    <% end %>
+
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <!--<img src="/images/burkut.jpg" class="d-block w-100" alt="...">-->
+      <%= image_tag(@carousel_active.image, class:"d-block w-100", alt:"...") %>
+      <div class="carousel-caption d-none d-md-block">
+        <h5>
+          <%= @carousel_active.title_ru if params[:locale] != true and params[:locale] != 'en' and params[:locale] != 'tm' and params[:locale] != 'ru' %>
+          <%= @carousel_active.title_ru if params[:locale] == 'ru' %>
+
+          <%= @carousel_active.title_tm if params[:locale] == 'tm' %>
+        </h5>
+        <p>
+          <%= @carousel_active.desc_ru if params[:locale] != true and params[:locale] != 'en' and params[:locale] != 'tm' and params[:locale] != 'ru' %>
+          <%= @carousel_active.desc_ru if params[:locale] == 'ru' %>
+
+          <%= @carousel_active.desc_tm if params[:locale] == 'tm' %>
+        </p>
+      </div>
+    </div>
+    <% @carousels.each do |carousel| %>
+      <div class="carousel-item">
+        <%= image_tag(carousel.image, class:"d-block w-100", alt:"...") %>
+        <div class="carousel-caption d-none d-md-block">
+          <h5>
+            <%= carousel.title_ru if params[:locale] != true and params[:locale] != 'en' and params[:locale] != 'tm' and params[:locale] != 'ru' %>
+            <%= carousel.title_ru if params[:locale] == 'ru' %>
+
+            <%= carousel.title_tm if params[:locale] == 'tm' %>
+          </h5>
+          <p>
+            <%= carousel.desc_ru if params[:locale] != true and params[:locale] != 'en' and params[:locale] != 'tm' and params[:locale] != 'ru' %>
+            <%= carousel.desc_ru if params[:locale] == 'ru' %>
+
+            <%= carousel.desc_tm if params[:locale] == 'tm' %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>

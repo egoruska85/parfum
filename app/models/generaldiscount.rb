@@ -1,0 +1,2 @@
+class Generaldiscount < ApplicationRecord
+end

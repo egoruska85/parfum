@@ -1,0 +1,65 @@
+<div class="col-12 col-lg-6">
+  <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <h3>Карусель на главной странице</h3>
+    <% if @carouseles.any? %>
+      <% @carouseles.each do |carousel| %>
+      <div class="row">
+        <div class="col-12">
+
+          <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+            <div class="row">
+              <div class="col-8">
+                <%= "#{carousel.title_ru}/#{carousel.title_tm}" %>
+                <%= image_tag(carousel.image, style:"width: 6rem;") %>
+              </div>
+              <div class="col-4">
+                <%= button_to carousel_path(carousel), method: :delete, data: { turbo_confirm: 'Действительно удалить?'}, class: "btn btn-danger", style:"--bs-btn-padding-y: .15rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .15rem;" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="13" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                  </svg>
+                <% end %>
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </div>
+      <% end %>
+    <% else %>
+      Нету созданых позиций для карусели
+    <% end %>
+    <hr>
+    <%= form_for :carousel, url: carousels_path do |f| %>
+    <div class="row">
+      <div class="col-6">
+        <%= f.text_field :title_ru, class:'form-control form-control-sm', placeholder:'На русском' %>
+      </div>
+      <div class="col-6">
+        <%= f.text_field :title_tm, class:'form-control form-control-sm', placeholder:'На туркменском' %>
+      </div>
+      <br><br>
+      <div class="col-6">
+        <%= f.text_area :desc_ru, class:'form-control form-control-sm', placeholder:'На русском' %>
+      </div>
+      <div class="col-6">
+        <%= f.text_area :desc_tm, class:'form-control form-control-sm', placeholder:'На русском' %>
+      </div>
+      <br><br><br><br>
+      <div class="col-12">
+        <center><%= f.file_field :image, class:'form-control form-control-sm' %></center>
+      </div>
+    </div>
+      <p>
+
+
+      </p>
+      <p>
+
+      </p>
+      <center><%= f.submit 'Создать', class:"btn btn-primary", style:"--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" %></center>
+    <% end %>
+  </div>
+</div>

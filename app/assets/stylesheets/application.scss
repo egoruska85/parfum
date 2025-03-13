@@ -1,1 +1,11 @@
 @import "bootstrap";
+
+@font-face {
+  font-family: "bankgothic";
+
+  /* Браузер сначала попробует найти шрифт локально */
+  src: local("bankgothic"),
+       /* Если не получилось, загрузит woff2 */
+       url("/fonts/bankgothicmdbt_medium.otf") format("woff"),
+       /* Если браузер не поддерживает woff2, загрузит woff */
+};

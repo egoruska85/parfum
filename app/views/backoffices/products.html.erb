@@ -1,2 +1,30 @@
 <center><h1>Товары</h1></center>
 <%= render 'navbar' %>
+<div class="row">
+  <%= search_form_for @q, url: products_backoffices_path, class:"d-flex", role:"search" do |f| %>
+  <%= f.search_field :name_or_product_code_cont, class:"form-control me-2", type:"search", style:"width:225px;" %>
+
+<%= f.submit class:"btn btn-outline-success", type:"submit"%>
+
+<% end %>
+  <div class="col-12 col-lg-6">
+      <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+        <div class="row">
+          <% @products.each do |product| %>
+            <div class="col-2">
+              <p style="font-size: 12px;"><%= product.product_code %></p>
+            </div>
+            <div class="col-2">
+              <p style="font-size: 12px;"><%= product.name %></p>
+            </div>
+            <div class="col-2">
+              <% @category = Category.where(id: product.category_id) %>
+              <p style="font-size: 12px;"><%= @category.first.name %></p>
+            </div>
+            <hr>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
