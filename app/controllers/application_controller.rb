@@ -1,7 +1,26 @@
 class ApplicationController < ActionController::Base
-   before_action :set_locale
+  before_action :set_locale, :set_render_cart, :initialize_cart
 
-   private
+  private
+
+  def navbar_links
+    @genders = Gender.all
+    @categories = Category.all
+  end
+
+  def set_render_cart
+    @render_cart = true
+  end
+
+  def initialize_cart
+    @cart ||= Cart.find_by(id: session[:cart_id])
+
+    if @cart.nil?
+      @cart = Cart.create
+      session[:cart_id] = @cart.id
+    end
+
+  end
 
   def set_locale
     I18n.locale = extract_locale || I18n.default_locale

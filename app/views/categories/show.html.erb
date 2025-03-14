@@ -38,8 +38,11 @@
                       <img src="<%= rails_blob_url(product.image) %>" class="card-img-top" alt="..." style="width: absolute; height: 150px;">
                       <div class="card-body">
                         <h6 class="card-title" style="font-size: 12px;"><%= product.name %></h6>
-
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <%= form_with(url: cart_add_path) do |f|%>
+                          <%= f.hidden_field :id, value: product.id %>
+                          <%= f.number_field :quantity, value: 0, min: 1 %>
+                          <%= f.submit "Add To Cart"%>
+                        <% end %>
                       </div>
                     </div>
                   </center>

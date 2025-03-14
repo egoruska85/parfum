@@ -6,4 +6,7 @@ class Product < ApplicationRecord
   belongs_to :brand
   has_one_attached :image
   has_many_attached :images
+
+  has_many :orderables
+  has_many :carts, through: :orderables
 end

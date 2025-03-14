@@ -4,6 +4,8 @@ class MainController < ApplicationController
     @genders = Gender.all
     @categories = Category.all
 
+    @q = Product.ransack(params[:q])
+    @products = @q.result(distinct: true)
 
     @a = -1
     @carousels = Carousel.where(id: 2..100)

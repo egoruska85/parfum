@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'cart', to: 'cart#show'
+
+  post 'cart/add'
+  post 'cart/remove'
+
   mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
   get 'main/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
