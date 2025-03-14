@@ -12,6 +12,7 @@ class GendersController < ApplicationController
 
     @categories = Category.where(gender_id: @gender.id )
     @products = Product.where(gender_id: @gender.id )
+
     set_page_options
   end
 

@@ -5,12 +5,16 @@
     <title></title>
   </head>
   <body>
-    <%= render "navbar" %>
+    <%= render 'cart/navbar' %>
     <h1>Your Cart</h1>
     <p>Your total is <%= @cart.total %></p>
-    <% @cart.orderables.each do |orderable| %>
-      <% product = orderable.product %>
-      <p><%= product.name %> <%= product.price %> * <%= orderable.quantity %> = <%= orderable.total %></p>
+    <%= turbo_frame_tag "cart_show" do %>
+      <% if @cart.orderables.count > 0 %>
+        <%= render "cart/orderables" %>
+        <p>Total: <%= @cart.total %></p>
+      <% else %>
+        <p>Your cart is empty!</p>
+      <% end %>
     <% end %>
   </body>
 </html>

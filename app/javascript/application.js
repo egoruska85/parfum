@@ -4,3 +4,8 @@ import "controllers"
 
 import "popper"
 import "bootstrap"
+
+
+function refreshPage() {
+location.reload();
+}

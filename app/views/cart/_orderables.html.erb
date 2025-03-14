@@ -15,7 +15,7 @@
       <% end %>
       <%= form_with(url: cart_remove_path) do |f|%>
         <%= f.hidden_field :id, value: orderable.id %>
-        <%= f.submit "X"%>
+        <button onclick="refreshPage()">X</button>
       <% end %>
       <strong>Total:</strong>
       <%= orderable.total %>
