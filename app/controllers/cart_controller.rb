@@ -1,10 +1,15 @@
 class CartController < ApplicationController
   def show
-    @render_cart = false
+    @render_cart = true
     @genders = Gender.all
+    @currency = Currency.last
+  end
+  def ordercart
+
   end
 
   def add
+    @currency = Currency.last
     @genders = Gender.all
     @product = Product.find_by(id: params[:id])
     quantity = params[:quantity].to_i
@@ -36,6 +41,5 @@ class CartController < ApplicationController
                                                     locals: { cart: @cart })]
       end
     end
-
   end
 end

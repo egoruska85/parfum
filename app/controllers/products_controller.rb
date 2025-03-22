@@ -2,11 +2,10 @@ class ProductsController < ApplicationController
   helper_method :recent_products
 
   def index
-    @q = Product.ransack(params[:q])
-    @products = @q.result(distinct: true)
     navbar_links
+    search_field
   end
-  
+
   def show
     @product = Product.find(params[:id])
     set_page_options

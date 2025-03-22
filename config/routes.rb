@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   get 'cart', to: 'cart#show'
+  get 'ordercart', to: 'cart#ordercart' 
 
   post 'cart/add'
   post 'cart/remove'
+
 
   mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
   get 'main/index'

@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   def navbar_links
     @genders = Gender.all
     @categories = Category.all
+    @currency = Currency.last
   end
 
   def search_field

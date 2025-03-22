@@ -6,15 +6,8 @@
   </head>
   <body>
     <%= render 'cart/navbar' %>
-    <h1>Your Cart</h1>
-    <p>Your total is <%= @cart.total %></p>
-    <%= turbo_frame_tag "cart_show" do %>
-      <% if @cart.orderables.count > 0 %>
-        <%= render "cart/orderables" %>
-        <p>Total: <%= @cart.total %></p>
-      <% else %>
-        <p>Your cart is empty!</p>
-      <% end %>
-    <% end %>
+    <div class="container">
+      <%= render partial: 'cart/cart' if @render_cart %>
+    </div>
   </body>
 </html>
