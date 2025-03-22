@@ -1,12 +1,19 @@
 class ApplicationController < ActionController::Base
-  before_action :set_locale, :set_render_cart, :initialize_cart
+  before_action :set_locale, :set_render_cart, :initialize_cart, :search_field
 
   private
 
   def navbar_links
     @genders = Gender.all
     @categories = Category.all
+    @currency = Currency.last
   end
+
+  def search_field
+    @q = Product.ransack(params[:q])
+    @products = @q.result(distinct: true)
+  end
+
 
   def set_render_cart
     @render_cart = true

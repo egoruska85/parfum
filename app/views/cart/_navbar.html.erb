@@ -37,15 +37,30 @@
             <%= gender.name_tm if params[:locale] == 'tm' %>
           <% end %>
         <% end %>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <%= search_form_for @q, class:"d-flex", role:"search" do |f| %>
+        <div class="input-group">
+          <%= search_form_for @q, class:"d-flex", role:"search" do |f| %>
+          <div class="input-group">
+            <%= f.search_field :name_or_product_code_cont, class:"form-control", type:"search", style:"width:225px;", placeholder:"Поиск" %>
+            <%= f.button class:"btn btn-outline-secondary" do %>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+              </svg>
+            <% end %>
+          </div>
+        <% end %>
+        </div>
+      <% end %>
       </ul>
 
     </div>
 
   </div>
+
+  <%= link_to cart_path, class:"btn " do %>
+    <% image_tag "/shoppaymentorderbuy-20_icon-icons.com_73877.svg", alt:"За стеклом", width:"40px", height:"30px"%>
+  <% end %>
+
+
 </nav>
 </div>
-<%= render partial: "cart/cart" if @render_cart %>

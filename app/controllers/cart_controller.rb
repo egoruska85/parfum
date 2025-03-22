@@ -1,10 +1,16 @@
 class CartController < ApplicationController
   def show
-    @render_cart = false
+    @render_cart = true
     @genders = Gender.all
+    @currency = Currency.last
+  end
+  def ordercart
+
   end
 
   def add
+    @currency = Currency.last
+    @genders = Gender.all
     @product = Product.find_by(id: params[:id])
     quantity = params[:quantity].to_i
     current_orderable = @cart.orderables.find_by(product_id: @product.id)
@@ -26,6 +32,7 @@ class CartController < ApplicationController
   end
 
   def remove
+    @genders = Gender.all
     Orderable.find_by(id: params[:id]).destroy
     respond_to do |format|
       format.turbo_stream do
