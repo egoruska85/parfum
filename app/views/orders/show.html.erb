@@ -1,0 +1,8 @@
+<%= render "include/navbar" %>
+
+<% @order.order_items.each do |order_item| %>
+  <% product = order_item.product %>
+  <div class="border" style="width: 85px; height: 85px;">
+    <img src="<%= rails_blob_url(product.image) %>" class="img-thumbnail" alt="...">
+  </div>
+<% end %>

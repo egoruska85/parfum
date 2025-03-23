@@ -9,4 +9,7 @@ class Product < ApplicationRecord
 
   has_many :orderables
   has_many :carts, through: :orderables
+
+  has_many :order_items
+  has_many :orders, through: :order_items
 end

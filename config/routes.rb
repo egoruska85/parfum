@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
+
   devise_for :users
   get 'cart', to: 'cart#show'
-  get 'ordercart', to: 'cart#ordercart' 
+  get 'ordercart', to: 'cart#ordercart'
 
   post 'cart/add'
   post 'cart/remove'
-
+  post 'orders/add'
 
   mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
   get 'main/index'
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
     collection {get :products}
     collection {get :interface}
   end
+  resources :orders
   resources :currencies
   resources :categories
   resources :genders

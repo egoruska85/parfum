@@ -1,3 +1,6 @@
 tm:
   cart:
     cart: "Sebet"
+    positions: "Iş orunlarynyň sany: "
+    count_products: "Önümleriň sany: "
+    prepaymet: "Töleg üçin"

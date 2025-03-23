@@ -1,3 +1,6 @@
 ru:
   cart:
     cart: "Корзина"
+    positions: "Количество позиций: "
+    count_products: "Количество продуктов: "
+    prepaymet: "К оплате"

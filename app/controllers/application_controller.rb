@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def see_count_cart
+    @positions = @cart.orderables.count
+  end
+
   def navbar_links
     @genders = Gender.all
     @categories = Category.all
@@ -42,7 +46,7 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-  
+
   def configure_permitted_parameters
     added_attrs = [:username, :email, :password, :password_confirmation, :remember_me]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs

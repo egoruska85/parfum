@@ -9,5 +9,13 @@
     <div class="container">
       <%= render partial: 'cart/cart' if @render_cart %>
     </div>
+    <div class="col-12 col-lg-6">
+      <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="min-height: 258px;">
+        <%= @product_discount %>
+        <%= form_with(url: orders_add_path) do |form| %>
+          <%= form.submit 'Создать заказ' %>
+        <% end %>
+      </div>
+    </div>
   </body>
 </html>

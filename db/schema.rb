@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_03_22_144202) do
+ActiveRecord::Schema[7.0].define(version: 2025_03_23_152658) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -104,6 +104,16 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_22_144202) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "product_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+  end
+
   create_table "orderables", force: :cascade do |t|
     t.integer "product_id", null: false
     t.integer "cart_id", null: false
@@ -112,6 +122,28 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_22_144202) do
     t.datetime "updated_at", null: false
     t.index ["cart_id"], name: "index_orderables_on_cart_id"
     t.index ["product_id"], name: "index_orderables_on_product_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "username"
+    t.string "phone"
+    t.integer "post_code"
+    t.string "city"
+    t.string "district"
+    t.string "street"
+    t.string "house"
+    t.string "flat"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "for_payment", precision: 5, scale: 2
+    t.decimal "payment", precision: 5, scale: 2
+    t.boolean "canceled"
+    t.boolean "accepted"
+    t.boolean "sent"
+    t.boolean "delivered"
+    t.boolean "received"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "productdiscounts", force: :cascade do |t|
@@ -164,8 +196,11 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_22_144202) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "categories", "genders"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
   add_foreign_key "orderables", "carts"
   add_foreign_key "orderables", "products"
+  add_foreign_key "orders", "users"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "countries"
