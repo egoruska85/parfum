@@ -5,4 +5,22 @@ ru:
     count_products: "Количество продуктов: "
     prepaymet: "К оплате"
   user:
-    exit: "Выйти"  
+    exit: "Выйти"
+  order:
+    table:
+      number: "№ заказа"
+      name: "Имя"
+      quantity: "Количество товаров"
+      total: "Сумма товаров"
+      prepayment: "К оплате"
+      payment: "Оплачено"
+      see: "Детально"
+    detail:
+      product_code: "Код"
+      name: "Наименование"
+      quantity: "Количество"
+      price: "Цена"
+      discount: "Скидка"
+      total_product: "Сумма товара"
+      price_discount: "Цена со скидкой"
+      delete: "Удаление"

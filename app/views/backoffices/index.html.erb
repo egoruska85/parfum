@@ -7,12 +7,49 @@
   <body>
     <center><h1>Оформление заказов</h1></center>
     <%= render 'navbar' %>
-    <% @orders.each do |order| %>
-      <%= link_to order_path(order) do %>
-        <%= order.user.username %>
-      <% end %>
-      <%= order.order_items.count %>
-      <%= order.payment %>
-    <% end %>
+    <div class="container-fluid">
+      <table class="table table-bordered ">
+        <thead>
+          <tr>
+            <th scope="col"><%= t('order.table.number') %></th>
+            <th scope="col"><%= t('order.table.name') %></th>
+            <th scope="col"><%= t('order.table.quantity')%></th>
+            <th scope="col"><%= t('order.table.total')%></th>
+            <th scope="col"><%= t('order.table.prepayment')%></th>
+            <th scope="col"><%= t('order.table.payment')%></th>
+            <th scope="col"><%= t('order.table.see')%></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <th scope="row"><%= order.id %></th>
+              <td><%= order.user.username %></td>
+              <td><%= order.see_prodduct_quantity %></td>
+              <td><%= order.total_discount %></td>
+              <td><%= order.for_payment %></td>
+              <td>
+                <% if order.payment == nil %>
+                  0.0
+                <% else %>
+                  <%= order.payment.to_f %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to order_backoffice_path(order) do %>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                </svg>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+
+
+        </tbody>
+      </table>
+    </div>
+
   </body>
 </html>

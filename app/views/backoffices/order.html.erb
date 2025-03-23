@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <center><h1>Оформление заказов</h1></center>
+    <%= render 'navbar' %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="border">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">№</th>
+                  <th scope="col"><%= t('order.detail.product_code')%></th>
+                  <th scope="col"><%= t('order.detail.name') %></th>
+                  <th scope="col"><%= t('order.detail.price') %></th>
+                  <th scope="col"><%= t('order.detail.discount') %></th>
+                  <th scope="col"><%= t('order.detail.price_discount') %></th>
+                  <th scope="col"><%= t('order.detail.quantity') %></th>
+                  <th scope="col"><%= t('order.detail.total_product') %></th>
+                  <th scope="col"><%= t('order.detail.delete') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @n = 1 %>
+                <% @order.order_items.each do |order_item| %>
+                  <% product = order_item.product %>
+                  <tr>
+                    <th scope="row"><%= @n %></th>
+                    <td><%= product.product_code %></td>
+                    <td><%= product.name %></td>
+                    <td><%= product.price.to_f %></td>
+                    <td><%= Productdiscount.last.value + "%" %></td>
+                    <td><%= order_item.product_discount %></td>
+                    <td><%= order_item.quantity %></td>
+                    <td><%= order_item.total_discount %></td>
+                    <td>
+
+                    </td>
+                  </tr>
+                  <% @n = @n + 1 %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
+<% @order.order_items.each do |order_item| %>
+  <% product = order_item.product %>
+  <center><%= product.product_code %></center>
+  <hr>
+<% end %>

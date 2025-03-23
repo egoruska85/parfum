@@ -24,6 +24,10 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:user_id)
   end
 
+  def order_item_params
+    params.require(:order_item).permit(:quantity)
+  end
+
   def move_items_from_cart_to_order(cart, order)
     cart.orderables.each.each do |orderable|
       order.order_items.create(product: orderable.product, quantity: orderable.quantity)

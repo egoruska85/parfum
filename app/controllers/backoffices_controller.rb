@@ -2,13 +2,19 @@ class BackofficesController < ApplicationController
   before_action :authenticate_user!, :navbar_links, :admin
 
   def index
-    @orders = Order.all
+    @orders = Order.order(created_at: :desc)
+
+    check_mobile_device
   end
 
   def options
     @genders = Gender.all
     @categories = Category.all
     @currencies = Currency.all
+  end
+
+  def order
+    @order = Order.find(params[:id])
   end
 
   def interface
@@ -27,4 +33,11 @@ class BackofficesController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def check_mobile_device
+    if request.user_agent =~ /Mobi|Android/i
+      redirect_to root_path
+    end
+  end
+
 end

@@ -19,8 +19,11 @@ Rails.application.routes.draw do
     collection {get :settings}
     collection {get :products}
     collection {get :interface}
+    member {get :order}
   end
-  resources :orders
+  resources :orders do
+    resources :order_items, only: [:update]
+  end
   resources :currencies
   resources :categories
   resources :genders

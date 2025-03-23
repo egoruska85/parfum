@@ -5,4 +5,22 @@ tm:
     count_products: "Önümleriň sany: "
     prepaymet: "Töleg üçin"
   user:
-    exit: "Сyk"    
+    exit: "Çyk"
+  order:
+    table:
+      number: "№ заказа"
+      name: "Имя"
+      quantity: "Önümleriň sany"
+      total: "Harytlaryň mukdary"
+      prepayment: "Töleg üçin"
+      payment: "Tölegli"
+      see: "Jikme-jiklikler"
+    detail:
+      product_code: "Kod"
+      name: "Ady"
+      quantity: "Önümleriň sany"
+      price: "Bahasy"
+      discount: "Arzanladyş"
+      total_product: "Harydyň mukdary"
+      price_discount: "Arzanladyş bahasy"
+      delete: "Aýyrmak"
