@@ -4,3 +4,5 @@ ru:
     positions: "Количество позиций: "
     count_products: "Количество продуктов: "
     prepaymet: "К оплате"
+  user:
+    exit: "Выйти"  
