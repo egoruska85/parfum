@@ -15,6 +15,8 @@ class BackofficesController < ApplicationController
 
   def order
     @order = Order.find(params[:id])
+    @q = Product.ransack(params[:q])
+    @products = @q.result(distinct: true)
   end
 
   def interface

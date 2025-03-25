@@ -9,3 +9,18 @@
        url("/fonts/bankgothicmdbt_medium.otf") format("woff"),
        /* Если браузер не поддерживает woff2, загрузит woff */
 };
+
+
+th, td {
+  padding: 8px; /* Установите отступы для ячеек */
+  text-align: left; /* Выравнивание текста */
+  border: 1px solid #ddd; /* Добавьте границу для ячеек */
+}
+
+.table-container {
+  height: 700px;  /* Установите максимальную высоту контейнера */
+  overflow-y: auto; /* Включите вертикальную прокрутку */
+  border: 1px solid #ccc; /* Добавьте границу для контейнера */
+  background-color:#FFDEAD
+  ;
+}

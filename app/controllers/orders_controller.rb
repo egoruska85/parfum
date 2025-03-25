@@ -18,6 +18,17 @@ class OrdersController < ApplicationController
     end
   end
 
+  def remove
+    current_order_item = OrderItem.find_by(id: params[:id])
+    current_order_item.destroy
+
+    @order = Order.find_by(id: current_order_item.order_id)
+    @order.for_payment = @order.total_discount
+    @order.save
+
+    redirect_to order_backoffice_path(current_order_item.order_id)
+  end
+
   private
 
   def order_params

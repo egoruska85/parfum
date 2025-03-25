@@ -3,6 +3,10 @@ class Order < ApplicationRecord
   has_many :order_items
   has_many :products, through: :order_items
 
+  def product_in_order?(product_id)
+    products.exists?(product_id)
+  end
+
   def total_discount
     order_items.to_a.sum { |orderable| orderable.total_discount }
   end

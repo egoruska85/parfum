@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   post 'cart/add'
   post 'cart/remove'
   post 'orders/add'
+  post 'orders/remove'
+  post 'orders/addposition'
 
   mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
   get 'main/index'
@@ -22,7 +24,7 @@ Rails.application.routes.draw do
     member {get :order}
   end
   resources :orders do
-    resources :order_items, only: [:update]
+    resources :order_items, only: [:update, :create]
   end
   resources :currencies
   resources :categories

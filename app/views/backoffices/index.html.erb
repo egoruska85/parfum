@@ -26,7 +26,7 @@
               <th scope="row"><%= order.id %></th>
               <td><%= order.user.username %></td>
               <td><%= order.see_prodduct_quantity %></td>
-              <td><%= order.total_discount %></td>
+              <td><%= order.total_discount.to_f %></td>
               <td><%= order.for_payment %></td>
               <td>
                 <% if order.payment == nil %>
