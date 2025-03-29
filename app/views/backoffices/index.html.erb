@@ -17,6 +17,7 @@
             <th scope="col"><%= t('order.table.total')%></th>
             <th scope="col"><%= t('order.table.prepayment')%></th>
             <th scope="col"><%= t('order.table.payment')%></th>
+            <th scope="col"><%= t('order.table.balance')%></th>
             <th scope="col"><%= t('order.table.see')%></th>
           </tr>
         </thead>
@@ -24,7 +25,7 @@
           <% @orders.each do |order| %>
             <tr>
               <th scope="row"><%= order.id %></th>
-              <td><%= order.user.username %></td>
+              <td><%= order.username %></td>
               <td><%= order.see_prodduct_quantity %></td>
               <td><%= order.total_discount.to_f %></td>
               <td><%= order.for_payment %></td>
@@ -33,6 +34,14 @@
                   0.0
                 <% else %>
                   <%= order.payment.to_f %>
+                <% end %>
+              </td>
+              <td>
+                <% if order.payment.to_f == order.for_payment.to_f %>
+                  Оплачено
+                <% elsif order.payment.to_f < order.for_payment.to_f %>
+                  <% @ammount = order.for_payment - order.payment.to_f %>
+                  <%= @ammount.to_f %>
                 <% end %>
               </td>
               <td>

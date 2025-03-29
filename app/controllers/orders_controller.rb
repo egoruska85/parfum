@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, :navbar_links
+  before_action :navbar_links
 
   def show
     navbar_links
@@ -8,14 +8,37 @@ class OrdersController < ApplicationController
 
   def add
     @order = Order.new
-    @order.user_id = current_user.id
+    if current_user
+      @order.user_id = current_user.id
+      @order.username = current_user.username
+    else
+      @order.username = 'Гость'
+    end
     @order.for_payment = @cart.total_discount
+    @order.payment = 0
     if @order.save
       move_items_from_cart_to_order(@cart, @order)
       redirect_to @order, notice: 'Заказ успешно создан.'
     else
       render :new
     end
+  end
+
+  def update
+    @order = Order.find(params[:id])
+    pay = params[:order][:pay].to_f
+
+    @order.payment += pay
+
+    @order.change = @order.payment - @order.for_payment if @order.payment > @order.for_payment
+
+    change(@order)
+
+    if @order.update(order_params)
+      flash[:notice] = "Внесено: " + pay.to_f.to_s
+      redirect_to order_backoffice_path(@order)
+    end
+
   end
 
   def remove
@@ -31,8 +54,14 @@ class OrdersController < ApplicationController
 
   private
 
+  def change(order)
+    if order.for_payment < order.payment
+      order.payment = order.for_payment
+    end
+  end
+
   def order_params
-    params.require(:order).permit(:user_id)
+    params.require(:order).permit(:user_id, :payment)
   end
 
   def order_item_params

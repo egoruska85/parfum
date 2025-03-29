@@ -15,6 +15,7 @@ ru:
       prepayment: "К оплате"
       payment: "Оплачено"
       see: "Детально"
+      balance: "Остаток"
     detail:
       product_code: "Код"
       name: "Наименование"

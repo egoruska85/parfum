@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_03_23_152658) do
+ActiveRecord::Schema[7.0].define(version: 2025_03_29_020030) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -125,7 +125,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_23_152658) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "user_id", null: false
     t.string "username"
     t.string "phone"
     t.integer "post_code"
@@ -143,7 +142,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_23_152658) do
     t.boolean "sent"
     t.boolean "delivered"
     t.boolean "received"
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.string "user_id"
+    t.decimal "change", precision: 5, scale: 2
   end
 
   create_table "productdiscounts", force: :cascade do |t|
@@ -189,6 +189,10 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_23_152658) do
     t.string "flat"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "telegram"
+    t.boolean "whatsapp"
+    t.boolean "imo"
+    t.boolean "delivery_man"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -200,7 +204,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_23_152658) do
   add_foreign_key "order_items", "products"
   add_foreign_key "orderables", "carts"
   add_foreign_key "orderables", "products"
-  add_foreign_key "orders", "users"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "countries"

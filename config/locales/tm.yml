@@ -15,6 +15,7 @@ tm:
       prepayment: "Töleg üçin"
       payment: "Tölegli"
       see: "Jikme-jiklikler"
+      balance: "Остаток"
     detail:
       product_code: "Kod"
       name: "Ady"
@@ -23,4 +24,4 @@ tm:
       discount: "Arzanladyş"
       total_product: "Harydyň mukdary"
       price_discount: "Arzanladyş bahasy"
-      delete: "Aýyrmak"
+      delete: "Galan"

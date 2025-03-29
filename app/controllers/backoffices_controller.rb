@@ -1,10 +1,10 @@
 class BackofficesController < ApplicationController
-  before_action :authenticate_user!, :navbar_links, :admin
+  before_action :authenticate_user!, :navbar_links, :admin, :check_mobile_device
 
   def index
     @orders = Order.order(created_at: :desc)
 
-    check_mobile_device
+
   end
 
   def options
