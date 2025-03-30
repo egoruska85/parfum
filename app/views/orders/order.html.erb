@@ -11,7 +11,6 @@
         <div class="col-12 col-lg-6">
           <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
             <span class="btn btn-primary position-relative"><%= t('order.number') + "#{@order.id}" + t('order.date') + @order.created_at.strftime("%d.%m.%Y") %></span>
-            <span class="btn btn-danger position-relative"><%= t('order.ordered') %></span>
             <br><br>
             <div class="row">
               <div class="col-12">
@@ -101,7 +100,7 @@
                     <b>
                       <%= t('order.address')%>:
                       <i style="color: blue;">
-                        <%= @order.city.capitalize %>, <%= @order.district.capitalize + ", " if @order.district != nil %>
+                        <%= @order.city.capitalize if @order.district != nil %>, <%= @order.district.capitalize + ", " if @order.district != nil %>
                         <%= @order.street.capitalize + "," if @order.street != nil %> <%= t('order.short_house')%> <%= @order.house %>, <%= t('order.short_flat') %>
                         <%= @order.flat if @order.street != nil %>
                       </i>
@@ -118,7 +117,11 @@
 
 
           </div>
+          <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+            <span class="btn btn-danger btn-sm position-relative"><%= t('order.ordered') %></span>
+          </div>
         </div>
+
       </div>
     </div>
   </body>

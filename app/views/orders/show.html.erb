@@ -147,14 +147,21 @@
                   </div>
                 </div>
                 <div class="col-6 col-lg-4">
+                  <br>
                   <div class="border rounded" style="background: #F5F5DC;">
-                    <%= f.hidden_field :ordered, value: true  %>
+                    <%= f.hidden_field :ordered, value: true %>
+                    <center>
+                      <b>></b>
+                      <%= f.button class:"btn btn-success btn-sm" do %>
+                        <%= t('order.order')%>
+                      <% end %>
+                      <b><</b>
+
+                    </center>
                   </div>
                 </div>
 
-                <%= f.button class:"btn btn-success btn-sm" do %>
-                  <%= t('order.order')%>
-                <% end %>
+
               <% end %>
             </div>
           </div>

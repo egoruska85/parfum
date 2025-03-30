@@ -7,7 +7,7 @@ tm:
   user:
     exit: "Çyk"
   order:
-    numder: "Sargyt № "
+    number: "Sargyt № "
     date: " dan "
     order: "Goýuň"
     name: "Ady"
@@ -22,6 +22,11 @@ tm:
     short_house: "ö."
     short_flat: "j. "
     ordered: "Sargyt edildi, düzedilmeli däl"
+    accept: "Sargyt kabul ediň"
+    sent: "Iber"
+    admin_ordered: "Edildi"
+    admin_accepted: "Kabul edildi"
+    admin_sended: "Iberildi"
     table:
       number: "№ заказа"
       name: "Имя"

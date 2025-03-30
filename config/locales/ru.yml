@@ -22,6 +22,11 @@ ru:
     short_house: "д."
     short_flat: "кв. "
     ordered: "Заказан, не подлежит исправлению"
+    accept: "Принять заказ"
+    sent: "Отправить"
+    admin_ordered: "Заказан"
+    admin_accepted: "Принят"
+    admin_sended: "Отправлен"
     table:
       number: "№ заказа"
       name: "Имя"

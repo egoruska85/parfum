@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :orders do
     resources :order_items, only: [:update, :create]
     member {patch :user_ordered}
+    member {patch :admin_ordered}
     member {get :order}
   end
   resources :currencies
