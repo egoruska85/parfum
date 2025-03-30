@@ -14,7 +14,7 @@ class Order < ApplicationRecord
     order_items.to_a.sum { |orderable| orderable.quantity }
   end
 
-  def order_count
+  def order_items_count
     order_items.count
   end
 

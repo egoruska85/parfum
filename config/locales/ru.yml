@@ -7,6 +7,21 @@ ru:
   user:
     exit: "Выйти"
   order:
+    number: "Заказ № "
+    date: " от "
+    order: "Оформить"
+    name: "Имя"
+    phone: "Номер телефона"
+    city: "Город"
+    district: "Район"
+    street: "Улица"
+    house: "Дом"
+    flat: "Квартира"
+    post_code: "Почтовый индекс"
+    address: "Адрес"
+    short_house: "д."
+    short_flat: "кв. "
+    ordered: "Заказан, не подлежит исправлению"
     table:
       number: "№ заказа"
       name: "Имя"
@@ -16,6 +31,13 @@ ru:
       payment: "Оплачено"
       see: "Детально"
       balance: "Остаток"
+    user:
+      table:
+        photo: "Картинка"
+        name: "Наименование"
+        quantity: "Количество"
+        price: "Цена"
+        total: "Сумма товара"
     detail:
       product_code: "Код"
       name: "Наименование"

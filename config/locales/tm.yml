@@ -7,6 +7,21 @@ tm:
   user:
     exit: "Çyk"
   order:
+    numder: "Sargyt № "
+    date: " dan "
+    order: "Goýuň"
+    name: "Ady"
+    phone: "Telefon belgisi"
+    city: "Şäher"
+    district: "Raýon"
+    street: "Köçe"
+    house: "Oý"
+    flat: "Jaý"
+    post_code: "Poçta kody"
+    address: "Адрес"
+    short_house: "ö."
+    short_flat: "j. "
+    ordered: "Sargyt edildi, düzedilmeli däl"
     table:
       number: "№ заказа"
       name: "Имя"
@@ -16,6 +31,13 @@ tm:
       payment: "Tölegli"
       see: "Jikme-jiklikler"
       balance: "Остаток"
+    user:
+      table:
+        photo: "Surat"
+        name: "Ady"
+        quantity: "Мukdary"
+        price: "Baha"
+        total: "Harydyň mukdary"
     detail:
       product_code: "Kod"
       name: "Ady"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_03_29_020030) do
+ActiveRecord::Schema[7.0].define(version: 2025_03_29_050134) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -144,6 +144,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_29_020030) do
     t.boolean "received"
     t.string "user_id"
     t.decimal "change", precision: 5, scale: 2
+    t.boolean "ordered"
+    t.boolean "refusal"
+    t.boolean "closed"
   end
 
   create_table "productdiscounts", force: :cascade do |t|

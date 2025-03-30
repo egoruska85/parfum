@@ -4,6 +4,14 @@ class OrdersController < ApplicationController
   def show
     navbar_links
     @order = Order.find(params[:id])
+
+    if @order.ordered == true
+      redirect_to order_order_path(@order)
+    end
+  end
+
+  def order
+    @order = Order.find(params[:id])
   end
 
   def add
@@ -41,6 +49,14 @@ class OrdersController < ApplicationController
 
   end
 
+  def user_ordered
+    @order = Order.find(params[:id])
+
+    if @order.update(order_params)
+      redirect_to order_path(@order)
+    end
+  end
+
   def remove
     current_order_item = OrderItem.find_by(id: params[:id])
     current_order_item.destroy
@@ -61,7 +77,10 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:user_id, :payment)
+    params.require(:order).permit(:user_id, :phone, :post_code, :city, :district,
+                                  :street, :house, :flat,:for_payment, :payment,
+                                  :canceled, :accepted, :sent, :delivered, :received,
+                                  :user, :change, :ordered, :refusal, :closed)
   end
 
   def order_item_params

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body style="background: #F5F5DC;">
+    <%= render "include/navbar" %>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-6">
+          <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+            <span class="btn btn-primary position-relative"><%= t('order.number') + "#{@order.id}" + t('order.date') + @order.created_at.strftime("%d.%m.%Y") %></span>
+            <span class="btn btn-danger position-relative"><%= t('order.ordered') %></span>
+            <br><br>
+            <div class="row">
+              <div class="col-12">
+                <% @order.order_items.each do |order_item| %>
+                  <% product = order_item.product %>
+
+                    <div class="row border border-primary rounded">
+
+                        <div class="col-3 col-lg-2">
+                          <div class="border" style="width: 85px; height: 85px;">
+                            <img src="<%= rails_blob_url(product.image) %>" class="img-thumbnail" alt="...">
+                          </div>
+                        </div>
+                        <div class="col-9 col-lg-10">
+                          <p style="font-size: 13px;">
+                            <%= product.name %>
+                          </p>
+                          <div class="row">
+                            <div class="col-3 col-lg-6">
+                              <b style="color: red;"><s><%= product.price.to_f %></s></b>
+                              <span class="badge text-bg-primary"><%= order_item.product_discount %></span>
+                            </div>
+                            <div class="col-2 col-lg-1">
+
+                            </div>
+                            <div class="col-6 col-lg-5">
+
+                              <div class="row">
+                                <div class="col-5 col-lg-3">
+                                  <b><%= order_item.quantity %></b>
+                                </div>
+                                <div class="col-3">
+                                </div>
+                                <div class="col-2">
+                                  <b style="color: red;"><s><%= order_item.total %></s></b>
+                                  <span class="badge text-bg-success"><%= order_item.total_discount %></span>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
+                      </div>
+                    </div>
+
+
+                <% end %>
+              </div>
+              <hr>
+              <div class="col-9 col-lg-10">
+                <p>
+                  <%= t('cart.positions') %><%= @order.order_items_count %>
+                </p>
+                <p>
+                  <%= t('cart.count_products') %><%= @order.see_prodduct_quantity %>
+                </p>
+              </div>
+              <div class="col-3 col-lg-2">
+                <p style="color: red;"><s><%= @order.total %></s></p>
+                <span class="badge text-bg-primary">
+                  <p style="color: white; font-size: 20px;">
+                    <%= @order.total_discount %>
+                  </p>
+                  <p>
+                    <%= t('cart.prepaymet')%>
+                  </p>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+            <div class="row">
+              <div class="col-6">
+                <div class="border rounded" style="background: #F5F5DC;">
+                  <div class="container">
+                    <b><%= t('order.name')%>: <i style="color: blue;"><%= @order.username.capitalize %></i></b>
+                    <br><br><br>
+                    <b><%= t('order.phone')%>: <i style="color: blue;"><%= @order.phone %></i></b>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="border rounded" style="background: #F5F5DC;">
+                  <div class="container">
+                    <b>
+                      <%= t('order.address')%>:
+                      <i style="color: blue;">
+                        <%= @order.city.capitalize %>, <%= @order.district.capitalize + ", " if @order.district != nil %>
+                        <%= @order.street.capitalize + "," if @order.street != nil %> <%= t('order.short_house')%> <%= @order.house %>, <%= t('order.short_flat') %>
+                        <%= @order.flat if @order.street != nil %>
+                      </i>
+                    </b>
+                    <br>
+                    <br>
+                    <b>
+                      <%= t('order.post_code')%>: <i style="color: blue;"><%= @order.post_code %></i>
+                    </b>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
