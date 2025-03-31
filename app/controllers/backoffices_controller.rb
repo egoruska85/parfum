@@ -26,6 +26,7 @@ class BackofficesController < ApplicationController
 
   def order
     @order = Order.find(params[:id])
+    @delivery_man = User.where(delivery_man: true)
     @q = Product.ransack(params[:q])
     @products = @q.result(distinct: true)
   end
