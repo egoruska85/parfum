@@ -24,11 +24,10 @@ class OrdersController < ApplicationController
     if current_user
       @order.user_id = current_user.id
       @order.username = current_user.username
-    else
-      @order.username = 'Гость'
     end
     @order.for_payment = @cart.total_discount
     @order.payment = 0
+    @order.change = 0
     if @order.save
       move_items_from_cart_to_order(@cart, @order)
       redirect_to @order, notice: 'Заказ успешно создан.'
@@ -51,14 +50,26 @@ class OrdersController < ApplicationController
       flash[:notice] = "Внесено: " + pay.to_f.to_s
       redirect_to order_backoffice_path(@order)
     end
-
   end
 
   def user_ordered
     @order = Order.find(params[:id])
+    phone = params[:order][:phone]
+    pin = params[:order][:pin]
 
-    if @order.update(order_params)
+    unless current_user
+      unless valid_pin_code?(pin)
+        @order.errors.add(:phone_number)
+        return
+      end
+    end
+
+    if valid_phone_number?(phone)
+      @order.update(order_params)
       redirect_to order_path(@order)
+    else
+      @order.errors.add(:phone_number, "is not a valid phone number")
+      render :show
     end
   end
 
@@ -67,6 +78,30 @@ class OrdersController < ApplicationController
 
     if @order.update(order_params)
       redirect_to order_backoffice_path(@order)
+    end
+  end
+
+  def update_status_delivery
+    @order = Order.find(params[:id])
+
+    if @order.update(order_params)
+      redirect_to delivery_more_detail_backoffice_path(@order)
+    end
+  end
+
+  def update_pay_delivery
+    @order = Order.find(params[:id])
+    pay = params[:order][:pay].to_f
+
+    @order.payment += pay
+
+    @order.change = @order.payment - @order.for_payment if @order.payment > @order.for_payment
+
+    change(@order)
+
+    if @order.update(order_params)
+      flash[:notice] = "Внесено: " + pay.to_f.to_s
+      redirect_to delivery_more_detail_backoffice_path(@order)
     end
   end
 
@@ -93,7 +128,7 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:user_id, :phone, :post_code, :city, :district,
                                   :street, :house, :flat,:for_payment, :payment,
                                   :canceled, :accepted, :sent, :delivered, :received,
-                                  :user, :change, :ordered, :refusal, :closed)
+                                  :username, :change, :ordered, :refusal, :closed, :pin)
   end
 
   def order_item_params
@@ -105,6 +140,18 @@ class OrdersController < ApplicationController
       order.order_items.create(product: orderable.product, quantity: orderable.quantity)
     end
     @cart.orderables.destroy_all # очищаем корзину после перемещения
+  end
+
+  def valid_phone_number?(phone_number)
+    # Пример регулярного выражения для проверки формата номера телефона
+    # Это регулярное выражение проверяет, что номер состоит из 10 цифр
+    phone_number.match?(/\A\+\d{11}\z/)
+  end
+
+  def valid_pin_code?(pin)
+    # Пример регулярного выражения для проверки формата номера телефона
+    # Это регулярное выражение проверяет, что номер состоит из 10 цифр
+    pin.match?(/\A\d{4}\z/)
   end
 
 end

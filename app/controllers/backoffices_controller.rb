@@ -1,10 +1,21 @@
 class BackofficesController < ApplicationController
-  before_action :authenticate_user!, :navbar_links, :admin, :check_mobile_device
+  before_action :authenticate_user!, :navbar_links, :admin, :check_mobile_device, except: [:delivery_operator, :delivery_more_detail]
 
   def index
     @orders = Order.order(created_at: :desc)
+  end
 
+  def delivery_operator
+    one_stage = Order.where(sent: true)
+    two_stage = one_stage.where(closed: nil)
+    @orders = two_stage
+  end
 
+  def delivery_more_detail
+    @order = Order.find(params[:id])
+    if @order.sent != true
+      redirect_to delivery_operator_backoffices_path
+    end
   end
 
   def options

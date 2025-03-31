@@ -5,7 +5,14 @@
     <title></title>
   </head>
   <body style="background: #F5F5DC;">
-    <%= render "include/navbar" %>
+    <nav class="navbar bg-body-tertiary">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <h1><%= t('order.delivery') %></h1>
+        </a>
+      </div>
+    </nav>
+    <br>
     <div class="container">
       <div class="row">
         <div class="col-12 col-lg-6">
@@ -72,7 +79,8 @@
                 <p style="color: red;"><s><%= @order.total %></s></p>
                 <span class="badge text-bg-primary">
                   <p style="color: white; font-size: 20px;">
-                    <%= @order.for_payment - @order.payment %>
+                    <% @total = @order.payment - @order.for_payment %>
+                    <%= @total %>
                   </p>
                   <p>
                     <%= t('cart.prepaymet')%>
@@ -117,31 +125,44 @@
 
 
           </div>
-          <% if @order.ordered == true and @order.accepted != true %>
-            <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-              <span class="btn btn-danger btn-sm position-relative"><%= t('order.ordered') %></span>
-            </div>
-          <% end %>
-          <% if @order.accepted == true and @order.sent != true %>
-            <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-              <span class="btn btn-warning btn-sm position-relative"><%= t('order.accepted') %></span>
-            </div>
-          <% end %>
-          <% if @order.sent == true and @order.delivered != true%>
-            <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-              <span class="btn btn-primary btn-sm position-relative"><%= t('order.sended') %></span>
-            </div>
-          <% end %>
-          <% if @order.delivered == true and @order.received != true %>
-            <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-              <span class="btn btn-success btn-sm position-relative"><%= t('order.delivered') %></span>
-            </div>
-          <% end %>
-          <% if @order.received == true %>
-            <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-              <span class="btn btn-secondary btn-sm position-relative"><%= t('order.received') %></span>
-            </div>
-          <% end %>
+          <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="min-height: 200px; width: 300px;">
+            <div class="border rounded" style="background: #F5F5DC; min-height: 180px; padding: 5px;">
+            <h6>
+              <%= t('order.payment')%>: <%= @order.payment %>
+            </h6>
+            <h6>
+              <%= t('order.for_payment')%>: <%= @order.for_payment - @order.payment %>
+            </h6>
+            <h6>
+              <%= t('order.change')%>: <%= @order.change if @order.change.to_i > 0 %>
+            </h6>
+
+              <% if @order.sent == true and @order.delivered != true %>
+                <%= form_with(model: @order, url: update_status_delivery_order_path(@order), method: :patch, local: true) do |f|%>
+                  <%= f.hidden_field :delivered, value: true %>
+                  <%= f.button class:"btn btn-success btn-sm" do %>
+                    <%= t('order.delivered')%>
+                  <% end %>
+                <% end %>
+              <% end %>
+
+              <% if @order.delivered == true and @order.received != true %>
+                <%= form_with(model: @order, url: update_pay_delivery_order_path(@order), method: :patch, local: true) do |f|%>
+                  <%= f.hidden_field :received, value: true %>
+                  <%= f.label t('order.pay') %>
+                  <%= f.text_field :pay, class:"form-control form-control-sm", placeholder:"#{@order.for_payment.to_i - @order.payment}" %>
+                  <br>
+                  <%= f.button class:"btn btn-info btn-sm" do %>
+                    <%= t('order.received')%>
+                  <% end %>
+                <% end %>
+              <% end %>
+              <% if @order.delivered == true and @order.received == true %>
+                <h1>Выполнено!!!</h1>
+              <% end %>
+
+          </div>
+          </div>
         </div>
 
       </div>

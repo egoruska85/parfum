@@ -21,12 +21,16 @@ Rails.application.routes.draw do
     collection {get :settings}
     collection {get :products}
     collection {get :interface}
+    collection {get :delivery_operator}
+    member {get :delivery_more_detail}
     member {get :order}
   end
   resources :orders do
     resources :order_items, only: [:update, :create]
     member {patch :user_ordered}
     member {patch :admin_ordered}
+    member {patch :update_status_delivery}
+    member {patch :update_pay_delivery}
     member {get :order}
   end
   resources :currencies

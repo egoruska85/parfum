@@ -82,7 +82,7 @@
                 <p style="color: red;"><s><%= @order.total %></s></p>
                 <span class="badge text-bg-primary">
                   <p style="color: white; font-size: 20px;">
-                    <%= @order.total_discount %>
+                    <%= @order.for_payment - @order.payment %>
                   </p>
                   <p>
                     <%= t('cart.prepaymet')%>
@@ -151,6 +151,10 @@
                   <div class="border rounded" style="background: #F5F5DC;">
                     <%= f.hidden_field :ordered, value: true %>
                     <center>
+                      <% unless current_user %>
+                        Вам обязатьельно нужно установить пинкод из 4 цифр.
+                        <%= f.text_field :pin, class:"form-control form-control-sm", placeholder: t('order.pin'), value:"" %>
+                      <% end %>
                       <b>></b>
                       <%= f.button class:"btn btn-success btn-sm" do %>
                         <%= t('order.order')%>
@@ -166,6 +170,16 @@
             </div>
           </div>
         </div>
+        <% if @order.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@order.errors.count, "error") %> prohibited this user from being saved:</h2>
+          <ul>
+            <% @order.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
       </div>
     </div>
   </body>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <nav class="navbar bg-body-tertiary">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <h1><%= t('order.delivery') %></h1>
+        </a>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+        <% @orders.each do |order| %>
+          <%= link_to delivery_more_detail_backoffice_path(order), class:"btn btn-primary" do %>
+            <%= t('order.number')%><%= order.id %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </body>
+</html>
