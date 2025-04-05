@@ -63,3 +63,9 @@ tm:
       total_product: "Harydyň mukdary"
       price_discount: "Arzanladyş bahasy"
       delete: "Galan"
+  user:
+    orders: "Sargytlaryňyz"
+    order:
+      more: "Has giňişleýin maglumat"
+      quantity: "Harytlar: "
+      pcs: " sany"    

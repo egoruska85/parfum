@@ -64,3 +64,9 @@ ru:
       total_product: "Сумма товара"
       price_discount: "Цена со скидкой"
       delete: "Удаление"
+  user:
+    orders: "Ваши заказы"
+    order:
+      more: "Подробнее"
+      quantity: "Товары: "
+      pcs: " шт."

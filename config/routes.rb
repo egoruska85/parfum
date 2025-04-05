@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
+  get 'users/index'
+  get 'users/show'
+  get 'users/new'
+  get 'users/create'
+  get 'users/edit'
+  get 'users/update'
+  get 'users/destroy'
+  get 'users/update'
 
   devise_for :users
+  resources :users do
+    collection {get :orders}
+  end
   get 'cart', to: 'cart#show'
   get 'ordercart', to: 'cart#ordercart'
 
@@ -24,6 +35,8 @@ Rails.application.routes.draw do
     collection {get :delivery_operator}
     member {get :delivery_more_detail}
     member {get :order}
+    collection {get :users}
+    member {get :user}
   end
   resources :orders do
     resources :order_items, only: [:update, :create]

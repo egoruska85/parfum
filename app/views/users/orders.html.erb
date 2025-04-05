@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body style="background: #F5F5DC;">
+    <%= render 'include/navbar' %>
+
+    <center>
+      <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="width: 380px;">
+        <h5><%= t('user.orders') %></h5>
+        <hr>
+        <% @orders.each do |order| %>
+          <div class="border">
+            <div class="row">
+              <div class="col-4">
+                <p style="font-size: 14px;"><%= t('order.number')%><%= order.id %></p>
+                <p style="font-size: 12px;"><%= t('user.order.quantity')%><%= order.see_prodduct_quantity %><%= t('user.order.pcs')%></p>
+              </div>
+              <div class="col-4">
+                <br>
+                <p style="font-size: 12px;"><%= order.created_at.strftime("%d.%m.%Y") %></p>
+              </div>
+              <div class="col-4">
+                <br>
+                <%= link_to order_path(order), class:"btn btn-success btn-sm", style:"font-size: 12px;" do %>
+                  <%= t('user.order.more') %>
+                <% end %>
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+          <br>
+          <br>
+        <% end %>
+      </div>
+    </center>
+  </body>
+</html>

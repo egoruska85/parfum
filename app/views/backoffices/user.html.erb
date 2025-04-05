@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body style="background: #F5F5DC;">
+    <center><h1>Настройка пользователей</h1></center>
+    <%= render 'navbar' %>
+    <br>
+      <center>
+      <div class="" style="width: 600px;">
+        <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+          <center><h3><%= @user.username %></h3></center>
+          <%= form_for :user, url: user_path(@user), method: :put do |f| %>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-6">
+                <%= f.text_field :username, class:"form-control form-control-sm"%>
+                <hr>
+                <b>
+                  <%= t('order.address')%>:
+                  <i style="color: blue;">
+                    <%= @user.city.capitalize if @user.city != nil %>, <%= @user.district.capitalize + ", " if @user.district != nil %>
+                    <%= @user.street.capitalize + "," if @user.street != nil %> <%= t('order.short_house')%> <%= @user.house %>, <%= t('order.short_flat') %>
+                    <%= @user.flat if @user.street != nil %>
+                    <br>
+                  </i>
+                  <%= t('order.address')%>:
+                  <i style="color: blue;">
+                    <%= @user.post_code %>
+                    <br>
+                  </i>
+                </b>
+              </div>
+              <div class="col-6">
+                <%= f.label 'Персонал' %>
+                <%= f.check_box :personal, class:"form-check-input" %>
+                <hr>
+                <% if @user.personal == true %>
+                <%= f.label 'Курьер' %>
+                <%= f.check_box :delivery_man, class:"form-check-input" %>
+                <br>
+                <%= f.label 'Оператор' %>
+                <%= f.check_box :operator, class:"form-check-input" %>
+                <br>
+                <%= f.label 'Администрация' %>
+                <%= f.check_box :administration, class:"form-check-input" %>
+                <% end %>
+              </div>
+            </div>
+            <br>
+            <center>
+              <%= f.button class:"btn btn-success btn-sm" do %>
+                Изменить
+              <% end %>
+            </center>
+          </div>
+
+          <% end %>
+        </div>
+      </div>
+    </center>
+  </body>
+</html>

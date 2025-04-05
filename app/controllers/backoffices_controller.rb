@@ -6,9 +6,13 @@ class BackofficesController < ApplicationController
   end
 
   def delivery_operator
-    one_stage = Order.where(sent: true)
-    two_stage = one_stage.where(closed: nil)
-    @orders = two_stage
+    if current_user.delivery_man == true
+      one_stage = Order.where(sent: true)
+      two_stage = one_stage.where(closed: nil)
+      @orders = two_stage
+    else
+      redirect_to root_path  
+    end
   end
 
   def delivery_more_detail
@@ -38,6 +42,15 @@ class BackofficesController < ApplicationController
   def products
     @q = Product.ransack(params[:q])
     @products = @q.result(distinct: true)
+  end
+
+  def users
+    @users = User.all
+    @personals = User.where(personal: true)
+  end
+
+  def user
+    @user = User.find(params[:id])
   end
 
   private

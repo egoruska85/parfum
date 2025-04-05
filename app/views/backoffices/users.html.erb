@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir/="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      .admin-status {
+        font-size: 20px; /* Увеличиваем размер шрифта */
+      }
+
+      .checkmark {
+        color: green; /* Цвет для галочки */
+      }
+
+      .checkmark:last-child {
+        color: red; /* Цвет для крестика */
+      }
+      </style>
+  </head>
+  <body style="background: #F5F5DC;">
+    <center><h1>Настройка пользователей</h1></center>
+    <%= render 'navbar' %>
+    <br>
+    <div class="container">
+      <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="">
+
+          <center><h4>Пользователи</h4></center>
+
+
+        <br>
+        <div class="row">
+          <div class="col-6">
+            <div class="border rounded" style="background: #F5F5DC; padding: 5px; overflow-y: auto; height: 500px; overflow-x:hidden">
+              <div class="" style="position: sticky; top: 0; z-index: 10; background-color: #F5F5DC;">
+                <h5>Все системные пользователи</h5>
+              </div>
+              <hr>
+              <% @users.each do |user| %>
+              <div class="row">
+                <div class="col-4">
+                  <%= link_to user_backoffice_path(user), class:"nav-link" do %>
+                    <%= user.username %>
+                  <% end %>
+                </div>
+                <div class="col-4">
+                  <%= user.phone %>
+                </div>
+                <div class="col-3">
+                  <td class="admin-status">
+                    <% if user.admin %>
+                      <span class="checkmark">✔️</span> <!-- Галочка -->
+                      <br>
+                      <p style="font-size: 10px;">Администратор</p>
+                    <% else %>
+                      <span class="checkmark">❌</span> <!-- Крестик -->
+                      <br>
+                      <p style="font-size: 10px;">Администратор</p>
+                    <% end %>
+                  </td>
+                </div>
+              </div>
+                <hr>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-6">
+
+            <div class="border rounded" style="background: #F5F5DC; padding: 5px;">
+              <div class="" style="position: sticky; top: 0; z-index: 10; background-color: #F5F5DC;">
+                <h5>Персонал</h5>
+              </div>
+              <hr>
+              <% @personals.each do |personal| %>
+              <div class="row">
+                <div class="col-4">
+                  <%= link_to user_backoffice_path(personal), class:"nav-link" do %>
+                    <%= personal.username %>
+                  <% end %>
+                </div>
+                <div class="col-4">
+                  <%= personal.phone %>
+                </div>
+                <div class="col-4">
+                  <td class="admin-status">
+                    <% if personal.admin %>
+                      <span class="checkmark">✔️</span> <!-- Галочка -->
+                      <br>
+                      <p style="font-size: 10px;">Администратор</p>
+                    <% else %>
+                      <span class="checkmark">❌</span> <!-- Крестик -->
+                      <br>
+                      <p style="font-size: 10px;">Администратор</p>
+                    <% end %>
+                  </td>
+                </div>
+              </div>
+                <hr>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
