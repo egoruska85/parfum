@@ -45,6 +45,8 @@ Rails.application.routes.draw do
     member {patch :update_status_delivery}
     member {patch :update_pay_delivery}
     member {get :order}
+    member {get :access}
+    member {patch :verify}
   end
   resources :currencies
   resources :categories

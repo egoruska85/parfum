@@ -1,9 +1,34 @@
 class OrdersController < ApplicationController
   before_action :navbar_links
 
+  def access
+    @order = Order.find(params[:id])
+  end
+
+  def verify
+    session[:pin_code] = params[:order][:pin_code].to_i
+    #@order = Order.find_by(pin: pin)
+    @order = Order.find(params[:id])
+
+    if @order.pin.to_i == session[:pin_code]
+      redirect_to order_path(@order)
+    else
+      session[:pin_code] = nil
+      redirect_to root_path
+      flash[:notice] = session[:pin_code]
+    end
+  end
+
   def show
     navbar_links
     @order = Order.find(params[:id])
+
+    unless user_signed_in?
+      if session[:pin_code].nil? and session[:pin] != @order.pin
+        redirect_to access_order_path
+        return
+      end
+    end
 
     if @order.ordered == true
       redirect_to order_order_path(@order)
@@ -13,6 +38,16 @@ class OrdersController < ApplicationController
 
   def order
     @order = Order.find(params[:id])
+
+    unless user_signed_in?
+      if session[:pin_code].nil? and session[:pin] != @order.pin
+        redirect_to access_order_path
+        return
+      end
+    end
+
+    session[:pin_code] = nil
+
     if @order.ordered != true
       redirect_to order_path(@order)
     end

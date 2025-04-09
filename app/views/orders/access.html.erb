@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <%= render 'include/navbar' %>
+
+    <h1>Введите пин-код для доступа к заказу</h1>
+
+
+    <%= form_with(model: @order, url: verify_order_path(@order), method: :patch, local: true) do |f|%>
+
+      <%= f.text_field :pin_code, class:"form-control form-control-sm" %>
+      <br>
+      <%= f.button class:"btn btn-info btn-sm" do %>
+        Войти
+      <% end %>
+    <% end %>
+
+
+    <% flash.each do |key, message| %>
+  <div class="alert alert-<%= key %>">
+
+      <%= message %>
+
+  </div>
+<% end %>
+  </body>
+</html>
