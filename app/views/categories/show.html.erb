@@ -10,13 +10,19 @@
       <div class="row">
         <div class="col-12 col-lg-2">
           <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-            <center style="font-size: 12px;"><%= @gender.name %></center>
+            <center style="font-size: 12px;">
+              <%= @gender.name if params[:locale] != true and params[:locale] != 'en' and params[:locale] != 'tm' and params[:locale] != 'ru' %>
+              <%= @gender.name if params[:locale] == 'ru' %>
+              <%= @gender.name_tm if params[:locale] == 'tm' %>
+            </center>
             <hr>
             <div class="row">
               <% @categories.each do |category| %>
               <div class="col-6 col-lg-12">
                 <%= link_to category_path(category), class:"btn" do %>
-                  <%= category.name %>
+                <%= category.name if params[:locale] != true and params[:locale] != 'en' and params[:locale] != 'tm' and params[:locale] != 'ru' %>
+                <%= category.name if params[:locale] == 'ru' %>
+                <%= category.name_tm if params[:locale] == 'tm' %>
                 <% end %>
               </div>
               <% end %>
@@ -37,11 +43,15 @@
                     <div class="card" style="min-height: 280px;">
                       <img src="<%= rails_blob_url(product.image) %>" class="card-img-top" alt="..." style="width: absolute; height: 150px;">
                       <div class="card-body">
-                        <h6 class="card-title" style="font-size: 12px;"><%= product.name %></h6>
+                        <hr>
+                          <%= link_to product_path(product), class:'nav-link' do %>
+                            <h6 class="card-title" style="font-size: 12px;"><%= product.name %></h6>
+                          <% end %>
+                        <hr>
                         <%= form_with(url: cart_add_path) do |f|%>
                           <%= f.hidden_field :id, value: product.id %>
                           <div class="row">
-                            <div class="col-4 col-lg-3">
+                            <div class="col-4 col-lg-4">
                               <%= f.number_field :quantity, value: 0, min: 1, style:"width: 60px;", class:"form-control" %>
                             </div>
                             <div class="col-6">

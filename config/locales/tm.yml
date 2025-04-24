@@ -68,4 +68,5 @@ tm:
     order:
       more: "Has giňişleýin maglumat"
       quantity: "Harytlar: "
-      pcs: " sany"    
+      pcs: " sany"
+    exit: "Çyk"      

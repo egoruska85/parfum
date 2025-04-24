@@ -28,6 +28,11 @@ class OrdersController < ApplicationController
         redirect_to access_order_path
         return
       end
+    else
+      if @order.user_id.to_s.to_i != current_user.id.to_s.to_i
+        redirect_to root_path
+        return
+      end
     end
 
     if @order.ordered == true
@@ -42,6 +47,13 @@ class OrdersController < ApplicationController
     unless user_signed_in?
       if session[:pin_code].nil? and session[:pin] != @order.pin
         redirect_to access_order_path
+        return
+      elsif @order.pin.nil?
+        authenticate_user!
+      end
+    else
+      if @order.user_id.to_s.to_i != current_user.id.to_s.to_i
+        redirect_to root_path
         return
       end
     end

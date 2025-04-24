@@ -31,6 +31,12 @@ class GendersController < ApplicationController
   private
 
   def set_page_options
-    @page_title = @gender.name
+    if params[:locale] != true and params[:locale] != 'en' and params[:locale] != 'tm' and params[:locale] != 'ru'
+      @page_title = "#{@gender.name}"
+    elsif params[:locale] == 'ru'
+      @page_title = "#{@gender.name}"
+    elsif params[:locale] == 'tm'
+      @page_title = "#{@gender.name_tm}"
+    end
   end
 end

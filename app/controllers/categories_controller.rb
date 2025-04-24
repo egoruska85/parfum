@@ -32,6 +32,12 @@ class CategoriesController < ApplicationController
   private
 
   def set_page_options
-    @page_title = "#{@category.name} " + "#{@gender.name}"
+    if params[:locale] != true and params[:locale] != 'en' and params[:locale] != 'tm' and params[:locale] != 'ru'
+      @page_title = "#{@category.name} " + "#{@gender.name}"
+    elsif params[:locale] == 'ru'
+      @page_title = "#{@category.name} " + "#{@gender.name}"
+    elsif params[:locale] == 'tm'
+      @page_title = "#{@category.name_tm} " + "#{@gender.name_tm}"
+    end
   end
 end

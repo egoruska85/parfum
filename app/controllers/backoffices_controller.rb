@@ -3,6 +3,9 @@ class BackofficesController < ApplicationController
 
   def index
     @orders = Order.order(created_at: :desc)
+    if current_user.delivery_man == true
+      redirect_to delivery_operator_backoffices_path
+    end
   end
 
   def delivery_operator
@@ -11,7 +14,7 @@ class BackofficesController < ApplicationController
       two_stage = one_stage.where(closed: nil)
       @orders = two_stage
     else
-      redirect_to root_path  
+      redirect_to root_path
     end
   end
 
