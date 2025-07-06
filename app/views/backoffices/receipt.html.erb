@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <center><h1><%= t('receipts.arrival_of_goods')%></h1></center>
+    <%= render 'navbar' %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-8">
+          <br>
+          <center><h3><%= t('receipts.arrival') + "#{@receipt.id}" %></h3></center>
+          <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+            <table class="table table-bordered">
+              <thead class="table-success" style="position: sticky; top: 0; z-index: 10;">
+                <tr>
+                  <th scope="col">№</th>
+                  <th scope="col"><%= t('order.detail.product_code')%></th>
+                  <th scope="col"><%= t('order.detail.name') %></th>
+                  <th scope="col"><%= t('order.detail.price') %></th>
+                  <th scope="col"><%= t('order.detail.quantity') %></th>
+                  <th scope="col"><%= t('order.detail.total_product') %></th>
+                  <th scope="col"><%= t('order.detail.delete') %></th>
+                </tr>
+              </thead>
+              <tbody class="table-warning">
+                <% @n = 1 %>
+                <% @receipt.receipt_items.each do |receipt_item| %>
+                  <% product = receipt_item.product %>
+                  <tr>
+                    <th scope="row"><%= @n %></th>
+                    <td><%= product.product_code %></td>
+                    <td><%= product.name %></td>
+                    <td><%= receipt_item.price %></td>
+                    <td>
+                      <%= form_with(model: receipt_item, url: update_quantity_receipt_item_path(@receipt, receipt_item), method: :patch, local: true) do |form| %>
+                        <%= form.number_field :quantity, value: receipt_item.quantity, style:"width: 50px;", class:"rounded" %>
+                        <%= form.button class:"rounded" do %>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                          <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                        </svg>
+                        <% end %>
+                      <% end %>
+                    </td>
+                    <td><%= receipt_item.total %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <%= search_form_for @q, url: order_backoffice_path, class:"d-flex", role:"search" do |f| %>
+            <%= f.search_field :name_or_product_code_cont, class:"form-control me-2", type:"search", style:"width:225px;" %>
+          <% end %>
+
+          <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+              <div style="height:500px;overflow-x:hidden;">
+                <div class="row">
+                  <% @products.each do |product| %>
+                    <div class="col-2">
+                      <p style="font-size: 12px;"><%= product.product_code %></p>
+                    </div>
+                    <div class="col-5">
+                      <p style="font-size: 12px;"><%= product.name %></p>
+                    </div>
+                    <div class="col-2">
+                      <% @discount_price = product.price.to_f - (product.price.to_f * Productdiscount.last.value.to_i) / 100.0 %>
+                      <% if product.price.to_i > @discount_price.to_i %>
+                        <p style="color: blue; font-size: 13px;"><i><b><i><%= @discount_price.to_i.to_f %></i></b></i></p>
+                        <p style="color: blue; font-size: 13px;"><i><b><i>Скидка: <%= Productdiscount.last.value + "%" %></i></b></i></p>
+                      <% elsif product.price.to_f == @discount_price %>
+                        <p style="font-size: 13px;"><b><i><%= @discount_price.to_i.to_f %></i></b></p>
+                      <% end %>
+                    </div>
+                    <div class="col-2">
+                      <% @category = Category.where(id: product.category_id) %>
+                      <p style="font-size: 12px;"><%= @category.first.name %></p>
+                    </div>
+                    <div class="col-1">
+                      <%= form_with(model: [@receipt, ReceiptItem.new]) do |f| %>
+                        <%= f.hidden_field :product_id, value: product.id %>
+                        <%= f.hidden_field :quantity, value: 1 %>
+                        <%= f.submit "+", class:"btn btn-success btn-sm" %>
+                      <% end %>
+                    </div>
+                    <hr>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

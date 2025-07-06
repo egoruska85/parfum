@@ -33,6 +33,8 @@ Rails.application.routes.draw do
     collection {get :products}
     collection {get :interface}
     collection {get :delivery_operator}
+    collection {get :receipts}
+    member {get :receipt}
     member {get :delivery_more_detail}
     member {get :order}
     collection {get :users}
@@ -54,4 +56,12 @@ Rails.application.routes.draw do
   resources :carousels
   resources :interfaceoptions
   resources :products
+
+  resources :receipts do
+    resources :receipt_items, only: [:update, :create]
+  end
+
+  resources :receipt_items do
+    member {patch :update_quantity}
+  end
 end

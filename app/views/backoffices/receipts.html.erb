@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <center><h1><%= t('receipts.arrival_of_goods')%></h1></center>
+    <%= render 'navbar' %>
+    <div class="container">
+      <center><h3><%= t('receipts.all_receipts') %></h3></center>
+      <table class="table table-bordered ">
+        <thead>
+          <tr>
+            <th scope="col"><%= t('receipts.number') %></th>
+            <th scope="col"><%= t('receipts.datetime') %></th>
+            <th scope="col"><%= t('receipts.total')%></th>
+            <th scope="col"><%= t('receipts.status')%></th>
+            <th scope="col"><%= t('receipts.see')%></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% @receipts.each do |receipt| %>
+              <th scope="row"><%= receipt.id %></th>
+              <td><%= "#{receipt.updated_at.strftime("%d.%m.%Y")}" + "#{receipt.updated_at.time}" %></td>
+              <td><%= receipt.total %></td>
+              <td>
+                <% if receipt.activation == true %>
+                  <p style="color: green;">Активирован</p>
+                <% else %>
+                  <p style="color: red;">Неактивирован</p>
+                <% end %>
+              </td>
+              <td>
+                <center>
+                  <%= link_to receipt_backoffice_path(receipt) do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                      <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                      <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                    </svg>
+                  <% end %>
+                </center>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

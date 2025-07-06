@@ -56,6 +56,14 @@ class BackofficesController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def receipts
+    @receipts = Receipt.all
+  end
+
+  def receipt
+    @receipt = Receipt.find(params[:id])
+  end
+
   private
 
   def admin

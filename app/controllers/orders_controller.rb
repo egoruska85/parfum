@@ -146,6 +146,10 @@ class OrdersController < ApplicationController
 
     change(@order)
 
+    if @order.payment < @order.for_payment
+      return 
+    end
+
     if @order.update(order_params)
       flash[:notice] = "Внесено: " + pay.to_f.to_s
       redirect_to delivery_more_detail_backoffice_path(@order)

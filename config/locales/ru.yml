@@ -71,3 +71,12 @@ ru:
       quantity: "Товары: "
       pcs: " шт."
     exit: "Выход"
+  receipts:
+    arrival_of_goods: "Приход товара"
+    all_receipts: "Все приходы товаров"
+    number: "№ "
+    datetime: "Дата и время"
+    total: "Сумма"
+    see: "Просмотр"
+    status: "Статус"
+    arrival: "Приходная накладная № "
